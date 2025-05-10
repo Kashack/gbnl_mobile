@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gbnl_mobile/core/theme/app_colors.dart';
-import 'package:gbnl_mobile/features/auth/data/model/user.dart';
 import 'package:gbnl_mobile/features/dashboard/cubit/dashboard_cubit.dart';
 import 'package:gbnl_mobile/features/dashboard/presentation/news_view.dart';
 

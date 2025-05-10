@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:gbnl_mobile/core/di/injection.dart';
 import 'package:gbnl_mobile/routes/app_routes.dart';
 import 'package:gbnl_mobile/routes/route_generator.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupDI();
   runApp(const MyApp());
 }
 
