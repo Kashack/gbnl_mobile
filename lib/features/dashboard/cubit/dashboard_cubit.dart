@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:gbnl_mobile/features/dashboard/data/repositories/dashboard_repository_impl.dart';
 import 'package:meta/meta.dart';
 
@@ -12,21 +13,26 @@ part 'dashboard_state.dart';
 class DashboardCubit extends Cubit<DashboardState> {
   final DashboardRepository _repository = DashboardRepositoryImpl();
 
-  DashboardCubit() : super(DashboardInitial());
+  DashboardCubit() : super(DashboardState());
 
   Future<void> loadUserName() async {
     final user = await AppDatabase().getUser();
-    emit(DashboardState(user: user));
+    emit(state.copyWith(user: user));
   }
 
-  void loadDashboard() async {
-    emit(DashboardLoading());
-
+  Future<void> loadDashboard() async {
+    emit(state.copyWith(status: DashboardStatus.loading, errorMessage: null));
     try {
       final news = await _repository.getNews();
-      emit(DashboardLoaded(news: news));
+      emit(state.copyWith(
+        status: DashboardStatus.success,
+        news: news,
+      ));
     } catch (e) {
-      emit(DashboardError("Failed to load dashboard: ${e.toString()}"));
+      emit(state.copyWith(
+        status: DashboardStatus.error,
+        errorMessage: e.toString(),
+      ));
     }
   }
 }

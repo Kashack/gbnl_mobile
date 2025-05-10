@@ -21,7 +21,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback(
-          (timeStamp) {
+      (timeStamp) {
         context.read<DashboardCubit>().loadDashboard();
       },
     );
@@ -33,41 +33,54 @@ class _DashboardScreenState extends State<DashboardScreen> {
       backgroundColor: Colors.black,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(120.0),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          title: BlocSelector<DashboardCubit, DashboardState, UserModel?>(
-            selector: (state) => state.user,
-            builder: (context, user) {
-              return Text(
-                "Hey ${user?.firstName}",
+        child: BlocBuilder<DashboardCubit, DashboardState>(
+          builder: (context, state) {
+            return AppBar(
+              automaticallyImplyLeading: false,
+              title: Text(
+                "Hey ${state.user?.firstName}",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 32,
-                  fontWeight: FontWeight.w900
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.w900),
+              ),
+              backgroundColor: AppColors.appBarColor,
+              bottom: state.status ==  DashboardStatus.error? PreferredSize(
+                preferredSize: Size.fromHeight(40.0),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(bottom: 12.0,left: 16),
+                  child: Text(
+                    "Something went wrong. Please try again later.",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
-              );
-            },
-          ),
-          backgroundColor: AppColors.appBarColor,
+              ) : null,
+            );
+          },
         ),
       ),
       body: BlocBuilder<DashboardCubit, DashboardState>(
         builder: (context, state) {
-          if (state is DashboardLoading) {
+          if (state.status == DashboardStatus.loading) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is DashboardLoaded) {
+          } else if (state.status == DashboardStatus.success) {
             return ListView.builder(
-              itemCount: state.news.length,
+              itemCount: state.news!.length,
               itemBuilder: (context, index) {
-                final news = state.news[index];
+                final news = state.news![index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              NewsView(authorizationUrl: news.url!),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            NewsView(authorizationUrl: news.url!),
+                      ),
+                    );
                   },
                   child: Container(
                     height: 132,
@@ -79,12 +92,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           height: 100,
                           width: 100,
                           fit: BoxFit.fill,
-                          placeholder: (context, url) =>
-                              Container(
-                                height: 100,
-                                width: 100,
-                                color: Colors.grey,
-                              ),
+                          placeholder: (context, url) => Container(
+                            height: 100,
+                            width: 100,
+                            color: Colors.grey,
+                          ),
                         ),
                         SizedBox(
                           width: 16,
@@ -94,7 +106,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     news.source ?? "",
@@ -131,7 +143,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
               },
             );
           }
-          return Container();
+          return RefreshIndicator(
+            onRefresh: () async {
+              context.read<DashboardCubit>().loadDashboard();
+            },
+            child: ListView(
+              children: [
+
+              ],
+            ),
+          );
         },
       ),
     );

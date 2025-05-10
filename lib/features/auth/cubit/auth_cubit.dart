@@ -11,13 +11,18 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
   Future<void> submitUser(String firstName, String lastName) async {
-    try{
+    try {
       emit(AuthLoading());
-      Future.delayed(Duration(seconds: 5));
-     final user = await AppDatabase()
-          .insertUser(UserModel(firstName: firstName, lastName: lastName));
+
+      //The duration is there just to elongate the loading time
+      await Future.delayed(Duration(seconds: 3));
+      final user = await AppDatabase().insertUser(UserModel(
+        firstName: firstName,
+        lastName: lastName,
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+      ));
       emit(AuthSuccess(userModel: user));
-    }catch (e){
+    } catch (e) {
       emit(AuthError());
     }
   }

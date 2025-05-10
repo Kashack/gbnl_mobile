@@ -24,7 +24,7 @@ class RouteGenerator {
       case AppRoutes.dashboard:
         return MaterialPageRoute(builder: (_) =>
             BlocProvider(
-              create: (context) => DashboardCubit(),
+              create: (context) => DashboardCubit()..loadUserName(),
               child: DashboardScreen(),
             ));
 

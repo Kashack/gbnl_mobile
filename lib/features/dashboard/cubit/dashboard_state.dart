@@ -1,22 +1,34 @@
 part of 'dashboard_cubit.dart';
 
-class DashboardState {
+enum DashboardStatus { initial, loading, success, error }
+
+class DashboardState extends Equatable{
+  final DashboardStatus status;
   final UserModel? user;
+  final List<NewsModel>? news;
+  final String? errorMessage;
 
-  const DashboardState({this.user});
-}
+  const DashboardState({
+    this.status = DashboardStatus.initial,
+    this.user,
+    this.news,
+    this.errorMessage,
+  });
 
-class DashboardInitial extends DashboardState {}
+  DashboardState copyWith({
+    DashboardStatus? status,
+    UserModel? user,
+    List<NewsModel>? news,
+    String? errorMessage,
+  }) {
+    return DashboardState(
+      status: status ?? this.status,
+      user: user ?? this.user,
+      news: news ?? this.news,
+      errorMessage: errorMessage,
+    );
+  }
 
-class DashboardLoading extends DashboardState {}
-
-class DashboardLoaded extends DashboardState {
-  final List<NewsModel> news;
-
-  const DashboardLoaded({required this.news});
-}
-
-class DashboardError extends DashboardState {
-  final String message;
-  const DashboardError(this.message);
+  @override
+  List<Object?> get props => [status, user, news, errorMessage];
 }

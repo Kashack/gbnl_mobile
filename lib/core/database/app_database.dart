@@ -25,7 +25,8 @@ class AppDatabase {
           CREATE TABLE users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             firstName TEXT,
-            lastName TEXT
+            lastName TEXT,
+            createdAt INTEGER
           )
         ''');
       },
@@ -39,9 +40,14 @@ class AppDatabase {
   }
 
   Future<UserModel?> getUser() async {
+    ///Get user that is created last as the current user
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('users');
-    if (maps.isNotEmpty) return UserModel.fromMap(maps.last);
+    final List<Map<String, dynamic>> maps = await db.query(
+      'users',
+      orderBy: 'createdAt DESC',
+      limit: 1,
+    );
+    if (maps.isNotEmpty) return UserModel.fromMap(maps.first);
     return null;
   }
 }
