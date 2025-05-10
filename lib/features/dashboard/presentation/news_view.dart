@@ -68,6 +68,16 @@ class _PaymentWebViewState extends State<NewsView> {
             Navigator.pop(context, false);
           },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.refresh,
+              size: 20,
+              color: Colors.black,
+            ),
+            onPressed: _refresh,
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -80,17 +90,8 @@ class _PaymentWebViewState extends State<NewsView> {
                 minHeight: 3,
               ),
             Expanded(
-              child: RefreshIndicator(
-                onRefresh: _refresh,
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: WebViewWidget(
-                      controller: controller,
-                    ),
-                  ),
-                ),
+              child: WebViewWidget(
+                controller: controller,
               ),
             ),
           ],

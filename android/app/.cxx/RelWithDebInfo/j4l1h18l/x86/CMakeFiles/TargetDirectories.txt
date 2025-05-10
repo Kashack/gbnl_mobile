@@ -1,0 +1,2 @@
+/Users/kasking/StudioProjects/gbnl_mobile/android/app/.cxx/RelWithDebInfo/j4l1h18l/x86/CMakeFiles/edit_cache.dir
+/Users/kasking/StudioProjects/gbnl_mobile/android/app/.cxx/RelWithDebInfo/j4l1h18l/x86/CMakeFiles/rebuild_cache.dir

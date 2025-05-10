@@ -10,23 +10,22 @@ class LoadingOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
-    return Material(
-        child: Stack(children: <Widget>[
-          child!,
-          IgnorePointer(
-            ignoring: !show,
-            child: Opacity(
-                opacity: show ? 1.0 : 0.0,
-                child: Container(
-                  width: screenSize.width,
-                  height: screenSize.height,
-                  alignment: Alignment.center,
-                  color: const Color.fromARGB(100, 0, 0, 0),
-                  child: Center(
-                    child: CircularProgressIndicator()
-                  ),
-                )),
-          ),
-        ]));
+    return Stack(children: <Widget>[
+      child!,
+      IgnorePointer(
+        ignoring: !show,
+        child: Opacity(
+            opacity: show ? 1.0 : 0.0,
+            child: Container(
+              width: screenSize.width,
+              height: screenSize.height,
+              alignment: Alignment.center,
+              color: const Color.fromARGB(100, 0, 0, 0),
+              child: Center(
+                child: CircularProgressIndicator()
+              ),
+            )),
+      ),
+    ]);
   }
 }
