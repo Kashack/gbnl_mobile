@@ -93,6 +93,7 @@ class _AuthScreenState extends State<AuthScreen> {
           onPressed: () {
             if (firstNameController.text.isNotEmpty &&
                 lastNameController.text.isNotEmpty) {
+              FocusScope.of(context).unfocus();
               context.read<AuthCubit>().submitUser(
                 firstNameController.text,
                 lastNameController.text,
