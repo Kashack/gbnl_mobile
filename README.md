@@ -2,15 +2,19 @@
 
 A new Flutter project.
 
-## Getting Started
+# Screenshot
+### Splash and auth
 
-This project is a starting point for a Flutter application.
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot%202025-05-11%20at%2010.03.45.png" hspace=50/>
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot 2025-05-11 at 10.04.10.png" hspace=50/>
 
-A few resources to get you started if this is your first Flutter project:
+### Notification
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot 2025-05-11 at 10.04.21.png" hspace=50/>
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot 2025-05-11 at 10.23.23.png" hspace=50/>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### news
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot 2025-05-11 at 10.04.44.png" hspace=50/>
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot 2025-05-11 at 10.05.07.png" hspace=50/>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Error
+<img height=500 width=250 src="https://github.com/Kashack/gbnl_mobile/blob/aeba78c3f8c03f19c59e42e82d4acddebe8a440e/screenshot/Screenshot 2025-05-11 at 10.05.57.png" hspace=50/>
